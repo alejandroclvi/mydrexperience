@@ -15,7 +15,6 @@ import {
   StatusBar,
   Image,
 } from 'react-native';
-import {appName} from '../../app.json';
 import _ from 'lodash';
 import moment from 'moment';
 import AppointmentDetails from '../components/AppDetails';

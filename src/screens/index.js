@@ -4,6 +4,7 @@ import Home from './Home';
 import Welcome from './Welcome';
 import ApptList from './ApptList';
 import MedsList from './MedsList';
+import ApptDetails from './ApptDetails';
 
 module.exports = {
   Login,
@@ -12,4 +13,5 @@ module.exports = {
   Welcome,
   ApptList,
   MedsList,
+  ApptDetails,
 };
