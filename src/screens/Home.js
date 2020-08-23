@@ -19,6 +19,79 @@ import _ from 'lodash';
 import moment from 'moment';
 import AppointmentDetails from '../components/AppDetails';
 
+function Notification({notification, type}) {
+  // if notification type is not appt, render a med notification
+  if (type === 'med') {
+    const {medication, time} = notification;
+    return (
+      <View style={NotStyles.wrapper}>
+        <View style={NotStyles.details}>
+          <View style={NotStyles.row}>
+            <Text style={NotStyles.title}>Take medication </Text>
+            <Text>{medication}</Text>
+          </View>
+          <View style={NotStyles.row}>
+            <Text style={NotStyles.title}>@ </Text>
+            <Text>{time || '5: 46pm'}</Text>
+          </View>
+        </View>
+        <Image
+          style={NotStyles.img}
+          source={require('../assets/ibuprofen.jpg')}
+        />
+      </View>
+    );
+  }
+  return (
+    <View style={NotStyles.wrapper}>
+      <AppointmentDetails appointment={notification} />
+    </View>
+  );
+}
+
+const NotStyles = StyleSheet.create({
+  wrapper: {
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '90%',
+    borderRadius: 10,
+    padding: 20,
+    marginTop: 10,
+  },
+  img: {
+    height: 30,
+    width: 30,
+  },
+  details: {
+    width: '80%',
+  },
+  row: {
+    flexDirection: 'row',
+  },
+  title: {
+    fontWeight: 'bold',
+  },
+});
+
+// TODO: remove when using real data
+const not = {
+  type: 'med',
+  notification: {
+    medication: 'Ibuprofen',
+    time: '5:46 pm',
+  },
+};
+
+const not_app = {
+  type: 'appt',
+  notification: {
+    doctor: 'Manuel Calvino',
+    time: moment().format('Ddd hh:mm a'),
+    notes: 'Fasting visit',
+  },
+};
+
 class Home extends Component {
   render() {
     const {user, medications, upcomingAppt} = this.props;
@@ -30,21 +103,36 @@ class Home extends Component {
             <Text style={styles.greeting}>
               Welcome back, {_.get(user, ['name'], 'user')}!
             </Text>
-            {/* <Image></Image> */}
-            <View style={styles.imageWrapper}/>
+            <View style={styles.imageWrapper}>
+              <Image
+                style={styles.img}
+                source={require('../assets/profile.png')}
+              />
+            </View>
           </View>
-          <View style={styles.medicWrapper}>
-            <Text style={styles.medTime}>
-              Your next medication is at {_.get(medications, [0, 'time'])}
-            </Text>
-            <Image
-              style={styles.medImage}
-              source={require('../assets/ibuprofen.jpg')}
-            />
-          </View>
-          <View style={styles.apptWrapper}>
-            <Text style={styles.apptHeader}>Upcomming appointment</Text>
-            <AppointmentDetails appointment={upcomingAppt} />
+          <View style={styles.notifications}>
+            <View>
+              <Text style={styles.header}>Notifications</Text>
+              <View style={styles.notificationsWrapper}>
+                <Notification {...not} />
+                <Notification {...not_app} />
+                {/* <View style={styles.medicWrapper}>
+                  <Text style={styles.medTime}>
+                    Your next medication is at {_.get(medications, [0, 'time'])}
+                  </Text>
+                  <Image
+                    style={styles.medImage}
+                    source={require('../assets/ibuprofen.jpg')}
+                  />
+                </View>
+                <View>
+                  <Text style={styles.apptHeader}>Upcomming appointment</Text>
+                </View>
+                <View style={styles.apptWrapper}>
+                  <AppointmentDetails appointment={upcomingAppt} />
+                </View> */}
+              </View>
+            </View>
           </View>
         </SafeAreaView>
       </>
@@ -56,11 +144,32 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  notificationsWrapper: {
+    width: '100%',
+    height: '90%',
+    alignItems: 'center',
+  },
+  header: {
+    fontWeight: 'bold',
+    fontSize: 23,
+    marginBottom: 20,
+  },
+  notifications: {
+    flex: 1,
+    padding: 20,
+  },
+  img: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    borderRadius: 50,
+  },
   imageWrapper: {
     width: 100,
     height: 100,
-    backgroundColor: 'pink',
     borderRadius: 50,
+    marginTop: 10,
+    marginBottom: 10,
   },
   apptHeader: {
     fontSize: 16,
@@ -75,29 +184,23 @@ const styles = StyleSheet.create({
   greeting: {
     fontSize: 20,
     fontWeight: 'bold',
-    //color: '#71099e',
   },
   medTime: {
-    marginLeft: 30,
     fontSize: 16,
     fontWeight: 'bold',
     color: '#71099e',
   },
   mainWrapper: {
-    flex: 0.2,
-    paddingTop: 30,
-    paddingLeft: 30,
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    paddingTop: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   medicWrapper: {
     flex: 1,
-    paddingTop: 30,
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
   apptWrapper: {
-    backgroundColor: 'red',
     flex: 1,
     padding: 20,
   },
@@ -115,7 +218,7 @@ Home.defaultProps = {
   ],
   upcomingAppt: {
     dr: 'Manuel Calvino',
-    time: moment().format('Ddd hh:mm a'),
+    time: moment().format('ddd hh:mm a'),
     notes: 'Fasting visit',
   },
 };
