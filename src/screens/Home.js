@@ -54,7 +54,7 @@ const NotStyles = StyleSheet.create({
     backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: '90%',
+    width: '100%',
     borderRadius: 10,
     padding: 20,
     marginTop: 10,

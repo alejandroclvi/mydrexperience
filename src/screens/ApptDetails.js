@@ -43,10 +43,10 @@ const ApptDetails = () => {
               }}
             />
           </View>
-          <View style={styles.btnWrapper}>
-            <AppButton title="Re-schedule" />
-            <AppButton title="Cancel Appt" />
-          </View>
+        </View>
+        <View style={styles.btnWrapper}>
+          <AppButton title="Re-schedule" />
+          <AppButton title="Cancel Appt" />
         </View>
       </SafeAreaView>
     </>
@@ -56,9 +56,11 @@ const ApptDetails = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   btnWrapper: {
     width: '100%',
+    marginBottom: 20,
   },
   dSeparator: {
     width: '100%',
