@@ -6,8 +6,15 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {SafeAreaView, StyleSheet, StatusBar, FlatList, View} from 'react-native';
+import React, {Component} from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  StatusBar,
+  FlatList,
+  View,
+  AsyncStorage,
+} from 'react-native';
 import AppDetails from '../components/AppDetails';
 import moment from 'moment';
 import _ from 'lodash';
@@ -26,22 +33,46 @@ function renderAppointment(appointmet, navigation) {
   );
 }
 
-const ApptList = ({appointments, navigation}) => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.container}>
-        <View style={styles.wrapper}>
-          <FlatList
-            data={appointments}
-            renderItem={(item) => renderAppointment(item, navigation)}
-            keyExtractor={(item) => item.id}
-          />
-        </View>
-      </SafeAreaView>
-    </>
-  );
-};
+class ApptList extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      appointments: [],
+    };
+  }
+  retrieveUserAppointments = async () => {
+    try {
+      const user_email = await AsyncStorage.getItem('user');
+      const user_data = await AsyncStorage.getItem(user_email);
+      const appointments = _.get(user_data, ['appointments'], []);
+      this.setState({appointments});
+    } catch (error) {
+      console.log('error', error);
+      // Error retrieving data
+    }
+  };
+
+  componentDidMount() {
+    this.retrieveUserAppointments();
+  }
+  render() {
+    const {appointments, navigation} = this.props;
+    return (
+      <>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={styles.container}>
+          <View style={styles.wrapper}>
+            <FlatList
+              data={appointments}
+              renderItem={(item) => renderAppointment(item, navigation)}
+              keyExtractor={(item) => item.id}
+            />
+          </View>
+        </SafeAreaView>
+      </>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

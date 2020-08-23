@@ -20,7 +20,6 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {Text, TouchableOpacity} from 'react-native';
 //TODO: is user logged in?
 const isUserLoggedIn = false;
 const Stack = createStackNavigator();
@@ -28,23 +27,34 @@ const NestedStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const HomeNestedStack = createStackNavigator();
 const MedListNestedStack = createStackNavigator();
-
-function SettingsBtn(navigation) {
-  return (
-    <TouchableOpacity
-      style={{marginRight: 10}}
-      onPress={() => navigation.navigate('Settings')}>
-      <Text>Settings</Text>
-    </TouchableOpacity>
-  );
-}
+const SettingsNestedStack = createStackNavigator();
 
 function MedListStack() {
   return (
     <MedListNestedStack.Navigator>
-      <MedListNestedStack.Screen name="MedsList" component={MedsList} />
+      <MedListNestedStack.Screen
+        name="MedsList"
+        component={MedsList}
+        options={({}) => ({
+          headerLeft: null,
+        })}
+      />
       <MedListNestedStack.Screen name="MedDetails" component={MedDetails} />
     </MedListNestedStack.Navigator>
+  );
+}
+
+function SettingsStack() {
+  return (
+    <SettingsNestedStack.Navigator>
+      <SettingsNestedStack.Screen
+        name="Settings"
+        component={Settings}
+        options={({}) => ({
+          headerLeft: null,
+        })}
+      />
+    </SettingsNestedStack.Navigator>
   );
 }
 
@@ -54,11 +64,10 @@ function HomeStack() {
       <HomeNestedStack.Screen
         name="Home"
         component={Home}
-        options={({navigation}) => ({
-          headerRight: () => SettingsBtn(navigation),
+        options={({}) => ({
+          headerLeft: null,
         })}
       />
-      <HomeNestedStack.Screen name="Settings" component={Settings} />
     </HomeNestedStack.Navigator>
   );
 }
@@ -66,7 +75,13 @@ function HomeStack() {
 function AppointmentListStack() {
   return (
     <NestedStack.Navigator>
-      <NestedStack.Screen name="ApptList" component={ApptList} />
+      <NestedStack.Screen
+        name="ApptList"
+        component={ApptList}
+        options={({}) => ({
+          headerLeft: null,
+        })}
+      />
       <NestedStack.Screen
         name="ApptDetails"
         component={ApptDetails}
@@ -82,6 +97,7 @@ function HomeTabNavigator() {
       <Tab.Screen name="Home" component={HomeStack} />
       <Tab.Screen name="ApptListStack" component={AppointmentListStack} />
       <Tab.Screen name="MedListStack" component={MedListStack} />
+      <Tab.Screen name="Settings" component={SettingsStack} />
     </Tab.Navigator>
   );
 }
