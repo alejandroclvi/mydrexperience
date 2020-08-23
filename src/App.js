@@ -15,10 +15,12 @@ import {
   MedsList,
   ApptDetails,
   MedDetails,
+  Settings,
 } from './screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Text, TouchableOpacity} from 'react-native';
 //TODO: is user logged in?
 const isUserLoggedIn = true;
 const Stack = createStackNavigator();
@@ -26,6 +28,16 @@ const NestedStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const HomeNestedStack = createStackNavigator();
 const MedListNestedStack = createStackNavigator();
+
+function SettingsBtn(navigation) {
+  return (
+    <TouchableOpacity
+      style={{marginRight: 10}}
+      onPress={() => navigation.navigate('Settings')}>
+      <Text>Settings</Text>
+    </TouchableOpacity>
+  );
+}
 
 function MedListStack() {
   return (
@@ -39,7 +51,14 @@ function MedListStack() {
 function HomeStack() {
   return (
     <HomeNestedStack.Navigator>
-      <HomeNestedStack.Screen name="Home" component={Home} />
+      <HomeNestedStack.Screen
+        name="Home"
+        component={Home}
+        options={({navigation}) => ({
+          headerRight: () => SettingsBtn(navigation),
+        })}
+      />
+      <HomeNestedStack.Screen name="Settings" component={Settings} />
     </HomeNestedStack.Navigator>
   );
 }

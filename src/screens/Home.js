@@ -114,23 +114,9 @@ class Home extends Component {
             <View>
               <Text style={styles.header}>Notifications</Text>
               <View style={styles.notificationsWrapper}>
+                {/** TODO: use a flatlist to render notifications */}
                 <Notification {...not} />
                 <Notification {...not_app} />
-                {/* <View style={styles.medicWrapper}>
-                  <Text style={styles.medTime}>
-                    Your next medication is at {_.get(medications, [0, 'time'])}
-                  </Text>
-                  <Image
-                    style={styles.medImage}
-                    source={require('../assets/ibuprofen.jpg')}
-                  />
-                </View>
-                <View>
-                  <Text style={styles.apptHeader}>Upcomming appointment</Text>
-                </View>
-                <View style={styles.apptWrapper}>
-                  <AppointmentDetails appointment={upcomingAppt} />
-                </View> */}
               </View>
             </View>
           </View>

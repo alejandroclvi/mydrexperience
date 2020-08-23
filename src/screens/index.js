@@ -6,6 +6,7 @@ import ApptList from './ApptList';
 import MedsList from './MedsList';
 import ApptDetails from './ApptDetails';
 import MedDetails from './MedDetails';
+import Settings from './Settings';
 
 module.exports = {
   Login,
@@ -16,4 +17,5 @@ module.exports = {
   MedsList,
   ApptDetails,
   MedDetails,
+  Settings,
 };
