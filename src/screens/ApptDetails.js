@@ -44,8 +44,8 @@ const ApptDetails = () => {
             />
           </View>
           <View style={styles.btnWrapper}>
-          <AppButton title="Re-schedule" />
-          <AppButton title="Cancel Appt" />
+            <AppButton title="Re-schedule" />
+            <AppButton title="Cancel Appt" />
           </View>
         </View>
       </SafeAreaView>
