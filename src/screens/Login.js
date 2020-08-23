@@ -53,10 +53,10 @@ class Login extends Component {
     // TODO: sanitize input
     const {email, password} = this.state;
     const user = await this.retrieveUser(email);
-    console.log('user', user);
     if (user && user.password === password) {
       //log user in
       await this.logUserIn(email);
+      this.setState({email: '', password: ''});
       this.props.navigation.navigate('HomeTabNavigator');
     } else {
       // show "user not found" message

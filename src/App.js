@@ -16,6 +16,7 @@ import {
   ApptDetails,
   MedDetails,
   Settings,
+  NewAppt,
 } from './screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -85,6 +86,11 @@ function AppointmentListStack() {
       <NestedStack.Screen
         name="ApptDetails"
         component={ApptDetails}
+        options={{headerShown: true}}
+      />
+      <NestedStack.Screen
+        name="NewAppt"
+        component={NewAppt}
         options={{headerShown: true}}
       />
     </NestedStack.Navigator>

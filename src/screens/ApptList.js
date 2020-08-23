@@ -16,6 +16,7 @@ import {
   AsyncStorage,
 } from 'react-native';
 import AppDetails from '../components/AppDetails';
+import AddAppointment from '../components/AddAppointment';
 import moment from 'moment';
 import _ from 'lodash';
 
@@ -68,6 +69,7 @@ class ApptList extends Component {
               keyExtractor={(item) => item.id}
             />
           </View>
+          <AddAppointment onPress={() => navigation.navigate('NewAppt')} />
         </SafeAreaView>
       </>
     );
