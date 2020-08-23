@@ -6,7 +6,7 @@
  * @flow strict-local
  */
 
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -30,6 +30,8 @@ class Home extends Component {
             <Text style={styles.greeting}>
               Welcome back, {_.get(user, ['name'], 'user')}!
             </Text>
+            {/* <Image></Image> */}
+            <View style={styles.imageWrapper}/>
           </View>
           <View style={styles.medicWrapper}>
             <Text style={styles.medTime}>
@@ -53,6 +55,12 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  imageWrapper: {
+    width: 100,
+    height: 100,
+    backgroundColor: 'pink',
+    borderRadius: 50,
   },
   apptHeader: {
     fontSize: 16,
