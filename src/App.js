@@ -7,7 +7,15 @@
  */
 
 import React from 'react';
-import {Home, Login, Signup, ApptList, MedsList, ApptDetails} from './screens';
+import {
+  Home,
+  Login,
+  Signup,
+  ApptList,
+  MedsList,
+  ApptDetails,
+  MedDetails,
+} from './screens';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -23,6 +31,7 @@ function MedListStack() {
   return (
     <MedListNestedStack.Navigator>
       <MedListNestedStack.Screen name="MedsList" component={MedsList} />
+      <MedListNestedStack.Screen name="MedDetails" component={MedDetails} />
     </MedListNestedStack.Navigator>
   );
 }

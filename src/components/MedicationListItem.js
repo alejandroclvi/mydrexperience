@@ -11,21 +11,23 @@ import React from 'react';
 import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 // medications (your choice of medication name). Data: medication name,
 // dosage, frequency. E.g. Tylenol, 1 tablet, 4 times/day, cost
-const MedicationListItem = ({price = 4.99}) => {
+const MedicationListItem = ({medicament, onPress}) => {
+  console.log('meeeee', medicament);
+  const {cost, name, dosis, frequency} = medicament;
   return (
     <TouchableOpacity
       style={medStyles.itemWrapper}
-      onPress={() => console.log('pressed')}>
+      onPress={() => onPress(medicament)}>
       <View>
-        <Text style={medStyles.itemTitle}>Ibuprofen 500mg</Text>
+        <Text style={medStyles.itemTitle}>{name}</Text>
         <View style={medStyles.subHeader}>
-          <Text style={medStyles.dosage}>2 Pills</Text>
+          <Text style={medStyles.dosage}>{dosis}</Text>
           <Text>x</Text>
-          <Text style={medStyles.frequency}>Daily</Text>
+          <Text style={medStyles.frequency}>{frequency}</Text>
         </View>
         <View style={medStyles.cost}>
           <Text>Cost: </Text>
-          <Text>${price}</Text>
+          <Text>${cost}</Text>
         </View>
       </View>
       <View style={medStyles.imageWrapper}>
