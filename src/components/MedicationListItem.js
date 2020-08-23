@@ -16,23 +16,25 @@ const MedicationListItem = ({medicament, onPress}) => {
   const {cost, name, dosis, frequency} = medicament;
   return (
     <TouchableOpacity
-      style={medStyles.itemWrapper}
+      style={styles.itemWrapper}
       onPress={() => onPress(medicament)}>
       <View>
-        <Text style={medStyles.itemTitle}>{name}</Text>
-        <View style={medStyles.subHeader}>
-          <Text style={medStyles.dosage}>{dosis}</Text>
-          <Text>x</Text>
-          <Text style={medStyles.frequency}>{frequency}</Text>
+        <View style={styles.section}>
+          <Text style={styles.itemTitle}>{name}</Text>
         </View>
-        <View style={medStyles.cost}>
-          <Text>Cost: </Text>
+        <View style={styles.section}>
+          <Text style={styles.itemTitle}>Dosis </Text>
+          <Text style={styles.dosage}>{dosis}</Text>
+          <Text style={styles.frequency}>{frequency}</Text>
+        </View>
+        <View style={styles.cost}>
+          <Text style={styles.itemTitle}>Cost </Text>
           <Text>${cost}</Text>
         </View>
       </View>
-      <View style={medStyles.imageWrapper}>
+      <View style={styles.imageWrapper}>
         <Image
-          style={medStyles.image}
+          style={styles.image}
           source={require('../assets/ibuprofen.jpg')}
         />
       </View>
@@ -40,12 +42,13 @@ const MedicationListItem = ({medicament, onPress}) => {
   );
 };
 
-const medStyles = StyleSheet.create({
+const styles = StyleSheet.create({
   dosage: {
     marginRight: 5,
   },
   frequency: {
-    marginLeft: 5,
+    color: 'black',
+    fontStyle: 'italic',
   },
   cost: {
     flexDirection: 'row',
@@ -53,12 +56,17 @@ const medStyles = StyleSheet.create({
   itemTitle: {
     fontWeight: 'bold',
   },
-  subHeader: {
+  section: {
     flexDirection: 'row',
+    marginBottom: 5,
   },
   itemWrapper: {
-    width: '100%',
-    backgroundColor: 'green',
+    marginTop: 10,
+    alignSelf: 'center',
+    width: '90%',
+    padding: 20,
+    borderRadius: 10,
+    backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

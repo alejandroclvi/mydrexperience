@@ -45,6 +45,30 @@ MedList.defaultProps = {
       dosis: '2 Pills',
       cost: 4.99,
     },
+    {
+      name: 'Ibuprofen',
+      frequency: 'Daily',
+      dosis: '2 Pills',
+      cost: 4.99,
+    },
+    {
+      name: 'Ibuprofen',
+      frequency: 'Daily',
+      dosis: '2 Pills',
+      cost: 4.99,
+    },
+    {
+      name: 'Ibuprofen',
+      frequency: 'Daily',
+      dosis: '2 Pills',
+      cost: 4.99,
+    },
+    {
+      name: 'Ibuprofen',
+      frequency: 'Daily',
+      dosis: '2 Pills',
+      cost: 4.99,
+    },
   ],
 };
 
@@ -57,8 +81,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   MedicationListWrapper: {
-    backgroundColor: 'yellow',
-    flex: 3,
+    height: '70%',
+    width: '100%',
   },
 });
 
