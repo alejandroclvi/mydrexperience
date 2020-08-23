@@ -6,34 +6,87 @@
  * @flow strict-local
  */
 
-import React from 'react';
-import {SafeAreaView, StyleSheet, StatusBar, View} from 'react-native';
+import React, {Component} from 'react';
+import {
+  SafeAreaView,
+  StyleSheet,
+  StatusBar,
+  View,
+  AsyncStorage,
+} from 'react-native';
 import AppButton from '../components/AppButton';
 import AppInputText from '../components/AppInputText';
 import Logo from '../components/Logo';
 
-const Signup = () => {
-  return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView style={styles.container}>
-        <Logo />
-        <View style={styles.inputWrapper}>
-          <AppInputText placeholder="email" />
-        </View>
-        <View style={styles.inputWrapper}>
-          <AppInputText placeholder="password" />
-        </View>
-        <View style={styles.inputWrapper}>
-          <AppInputText placeholder="repeat password" />
-        </View>
-        <View style={styles.buttonWrapper}>
-          <AppButton title="Sign Up" />
-        </View>
-      </SafeAreaView>
-    </>
-  );
-};
+class Signup extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      rPassword: '',
+    };
+  }
+
+  logUserIn = async (email) => {
+    try {
+      await AsyncStorage.setItem('user', email);
+    } catch (error) {
+      // Error saving data
+    }
+  };
+
+  signup = async () => {
+    const {email, password, rPassword} = this.state;
+    // TODO: sanitize input
+    if (email && password && rPassword && password === rPassword) {
+      // all fields are filled, sign user up
+      try {
+        await AsyncStorage.setItem(email, JSON.stringify({email, password}));
+        // log user in
+        await this.logUserIn(email);
+        // navigate home
+        this.props.navigation.navigate('HomeTabNavigator');
+      } catch (error) {
+        // Error saving data
+      }
+    } else {
+      // show message indicating to complete all empty fields
+    }
+  };
+
+  render() {
+    return (
+      <>
+        <StatusBar barStyle="dark-content" />
+        <SafeAreaView style={styles.container}>
+          <Logo />
+          <View style={styles.inputWrapper}>
+            <AppInputText
+              onChangeText={(text) => this.setState({email: text})}
+              placeholder="email"
+            />
+          </View>
+          <View style={styles.inputWrapper}>
+            <AppInputText
+              onChangeText={(text) => this.setState({password: text})}
+              placeholder="password"
+            />
+          </View>
+          <View style={styles.inputWrapper}>
+            <AppInputText
+              onChangeText={(text) => this.setState({rPassword: text})}
+              placeholder="repeat password"
+            />
+          </View>
+          <View style={styles.buttonWrapper}>
+            <AppButton title="Sign Up" onPress={this.signup} />
+          </View>
+        </SafeAreaView>
+      </>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {

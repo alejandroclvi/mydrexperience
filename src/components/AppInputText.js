@@ -9,10 +9,15 @@
 import React from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
 
-const Login = ({placeholder}) => {
+const Login = ({placeholder, onChangeText}) => {
   return (
     <View style={styles.inputContainer}>
-      <TextInput style={styles.input} placeholder={`${placeholder}`} />
+      <TextInput
+        style={styles.input}
+        autoCapitalize='none'
+        onChangeText={onChangeText}
+        placeholder={`${placeholder}`}
+      />
     </View>
   );
 };

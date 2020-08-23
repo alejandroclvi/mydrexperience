@@ -22,7 +22,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {Text, TouchableOpacity} from 'react-native';
 //TODO: is user logged in?
-const isUserLoggedIn = true;
+const isUserLoggedIn = false;
 const Stack = createStackNavigator();
 const NestedStack = createStackNavigator();
 const Tab = createBottomTabNavigator();
