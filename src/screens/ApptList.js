@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import {SafeAreaView, StyleSheet, StatusBar, FlatList} from 'react-native';
+import {SafeAreaView, StyleSheet, StatusBar, FlatList, View} from 'react-native';
 import AppDetails from '../components/AppDetails';
 import moment from 'moment';
 import _ from 'lodash';
@@ -31,11 +31,13 @@ const ApptList = ({appointments, navigation}) => {
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
-        <FlatList
-          data={appointments}
-          renderItem={(item) => renderAppointment(item, navigation)}
-          keyExtractor={(item) => item.id}
-        />
+        <View style={styles.wrapper}>
+          <FlatList
+            data={appointments}
+            renderItem={(item) => renderAppointment(item, navigation)}
+            keyExtractor={(item) => item.id}
+          />
+        </View>
       </SafeAreaView>
     </>
   );
@@ -44,6 +46,14 @@ const ApptList = ({appointments, navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  wrapper: {
+    height: '100%',
+    width: '100%',
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingBottom: 20,
+    paddingTop: 10,
   },
 });
 

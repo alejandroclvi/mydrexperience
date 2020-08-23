@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 import moment from 'moment';
-import AppointmentDetails from '../components/AppDetails';
+import AppointmentDetails from '../components/NotificationDetails';
 
 function Notification({notification, type}) {
   // if notification type is not appt, render a med notification
