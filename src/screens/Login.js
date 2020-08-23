@@ -11,9 +11,8 @@ import {SafeAreaView, StyleSheet, StatusBar, View} from 'react-native';
 import AppButton from '../components/AppButton';
 import AppInputText from '../components/AppInputText';
 import Logo from '../components/Logo';
-import {appName} from '../../app.json';
 
-const Login = ({componentId}) => {
+const Login = ({}) => {
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -26,26 +25,8 @@ const Login = ({componentId}) => {
           <AppInputText placeholder="password" />
         </View>
         <View style={styles.buttonWrapper}>
-          <AppButton
-            title="Log In"
-            onPress={() =>
-              Navigation.push(componentId, {
-                component: {
-                  name: `com.${appName}.welcome`,
-                },
-              })
-            }
-          />
-          <AppButton
-            title="Sign Up"
-            onPress={() =>
-              Navigation.push(componentId, {
-                component: {
-                  name: `com.${appName}.signup`,
-                },
-              })
-            }
-          />
+          <AppButton title="Log In" onPress={() => console.log('brrr')} />
+          <AppButton title="Sign Up" onPress={() => console.log('brrr')} />
         </View>
       </SafeAreaView>
     </>
