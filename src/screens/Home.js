@@ -18,6 +18,7 @@ import {
 import _ from 'lodash';
 import moment from 'moment';
 import AppointmentDetails from '../components/NotificationDetails';
+import {withUsers} from '../queries';
 
 function Notification({notification, type}) {
   // if notification type is not appt, render a med notification
@@ -93,8 +94,13 @@ const not_app = {
 };
 
 class Home extends Component {
+  // async componentDidMount() {
+  //   console.log('props', await this.props.users.startPolling(1000));
+  // }
   render() {
     const {user, medications, upcomingAppt} = this.props;
+   //this.props.users.loading ? this.props.users.refetch() : null;
+    console.log('props.', this.props);
     return (
       <>
         <StatusBar barStyle="dark-content" />
@@ -209,4 +215,4 @@ Home.defaultProps = {
   },
 };
 
-export default Home;
+export default withUsers(Home);

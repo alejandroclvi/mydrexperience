@@ -22,7 +22,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 //TODO: is user logged in?
-const isUserLoggedIn = false;
+const isUserLoggedIn = true;
 const Stack = createStackNavigator();
 const NestedStack = createStackNavigator();
 const Tab = createBottomTabNavigator();

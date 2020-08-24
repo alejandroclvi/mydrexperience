@@ -11,10 +11,10 @@ import { ApolloProvider } from 'react-apollo';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { createHttpLink } from 'apollo-link-http';
 
-
+//ipconfig getifaddr en0
 const Client = () => {
   const client = new ApolloClient({
-    link: createHttpLink({ uri: 'http://localhost:5000/graphql' }),
+    link: createHttpLink({ uri: 'http://10.0.0.115:5000/graphql' }),
     cache: new InMemoryCache()
   });
   return (
