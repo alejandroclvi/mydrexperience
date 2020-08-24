@@ -1,0 +1,6 @@
+module Pods_mydrexperience_mydrexperienceTests {
+  umbrella header "Pods-mydrexperience-mydrexperienceTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
