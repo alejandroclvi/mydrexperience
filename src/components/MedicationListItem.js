@@ -69,6 +69,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    shadowRadius: 4,
+    shadowOffset: {width: 1, height: 4},
+    shadowOpacity: 0.15,
   },
   image: {
     width: '100%',

@@ -47,7 +47,7 @@ class AppointmentDetails extends Component {
                 longitudeDelta: 0.0051,
               }}
             >
-              <Marker coordinate={{latitude: location.lat, longitude: location.lng}}/>
+              {latitude && longitude && <Marker coordinate={{latitude, longitude}}/>}
             </MapView>
           </View>
         </TouchableOpacity>
@@ -66,6 +66,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
     height: windowHeight * 0.25,
+    shadowRadius: 4,
+    shadowOffset: {width: 1, height: 4},
+    shadowOpacity: 0.15,
   },
   notes: {
     color: 'grey',

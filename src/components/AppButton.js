@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 1,
     borderColor: '#1e90ff',
+    shadowRadius: 4,
+    shadowOffset: {width: 1, height: 4},
+    shadowOpacity: 0.15,
   },
   title: {
     fontWeight: 'bold',

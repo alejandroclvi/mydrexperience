@@ -64,6 +64,7 @@ class EditableSection extends Component {
 
 function MedicationItem({editable, save, updateState, medById}) {
   const { name, dosis, frequency, cost } = _.get(medById, ['med'], {});
+  console.log('cost', cost);
   return (
     <>
       <View style={styles.headerWrapper}>
@@ -98,7 +99,7 @@ function MedicationItem({editable, save, updateState, medById}) {
         </View>
         <View style={styles.section}>
           <Text style={styles.subHeader}>Cost</Text>
-          <Text style={styles.value}>$ {cost}</Text>
+          <Text style={[styles.value, {color: 'black'}]}>$ {cost}</Text>
         </View>
       </View>
       <View style={styles.btnWrapper}>
