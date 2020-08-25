@@ -14,6 +14,7 @@ import {
   View,
   StatusBar,
   FlatList,
+  Text,
 } from 'react-native';
 import MedicationListItem from '../components/MedicationListItem';
 import { withMeds } from '../queries';
@@ -26,14 +27,16 @@ const MedList = ({navigation, withMeds, meds, userId}) => {
   const medicaments = _.get(meds, ['meds', 'nodes'], []);
   const overAllExpenses = medicaments.length ? medicaments.reduce((acc, {cost, dosis}) => acc + (cost * dosis), 0) : 0;
   const graphicData = medicaments.map(({cost, name, dosis}) => {
-    const medSpending = 100 * ((cost*dosis)/overAllExpenses);
-    return {x: `${name} - ${medSpending}%`, y: medSpending};
+    const medCost = cost*dosis;
+    const medSpending = 100 * (medCost/overAllExpenses);
+    return {x: `${name} - $${(medCost||0).toFixed(2)}`, y: medSpending};
   });
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
         <View style={styles.chartWrapper}>
+          <Text style={{fontWeight: 'bold', fontSize: 16, color: 'white'}}>Daily Med Budget</Text>
           <VictoryPie
             data={graphicData}
             width={250}
@@ -82,7 +85,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   chartWrapper: {
-    backgroundColor: 'grey',
+    backgroundColor: '#1e90ff',
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
