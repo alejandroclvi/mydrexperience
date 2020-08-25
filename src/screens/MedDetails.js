@@ -15,6 +15,7 @@ import {
   StatusBar,
   Image,
   TextInput,
+  TouchableOpacity,
 } from 'react-native';
 import AppButton from '../components/AppButton';
 import { withUpdateMed, USER_MEDS, withMed } from '../queries';
@@ -27,16 +28,22 @@ class EditableSection extends Component {
       newValue: props.value,
     };
   }
+  componentDidUpdate() {
+    if(!(this.state.newValue||'').trim()) {
+      this.setState({newValue: this.props.value});
+    }
+  }
   render() {
     const {newValue} = this.state;
-    const {editable, onFocus, value, name, save} = this.props;
+    const {editable, onFocus, value, name, save, keyboardType} = this.props;
     const isBeingEdited = name === editable;
     return (
-      <View style={{flexDirection: 'row', borderRadius: 10, marginTop: 10, backgroundColor: '#1e90ff', padding: 10}} onPress={() => {}}>
+      <View style={{flexDirection: 'row', borderRadius: 10, marginTop: 10, backgroundColor: '#1e90ff', padding: 10}}>
          <TextInput
+          keyboardType={keyboardType}
           ref='input'
           onFocus={onFocus}
-          value={isBeingEdited ? newValue: value}
+          value={isBeingEdited ? newValue : value}
           style={styles.value}
           autoCapitalize='none'
           autoCorrect={false}
@@ -46,7 +53,7 @@ class EditableSection extends Component {
           { isBeingEdited ?
             <Text
               onPress={() => {
-                save({[name]: newValue})
+                save({[name]: newValue});
                 this.refs.input.blur();
               }}
               style={{color: 'white', fontWeight: 'bold'}}
@@ -64,7 +71,6 @@ class EditableSection extends Component {
 
 function MedicationItem({editable, save, updateState, medById}) {
   const { name, dosis, frequency, cost } = _.get(medById, ['med'], {});
-  console.log('cost', cost);
   return (
     <>
       <View style={styles.headerWrapper}>
@@ -81,7 +87,8 @@ function MedicationItem({editable, save, updateState, medById}) {
             save={save}
             onFocus={() => updateState({editable:'dosis'})}
             onEndEditing={() => updateState({editable:''})}
-            value={dosis}
+            keyboardType='numeric'
+            value={dosis && dosis.toString()}
             name='dosis'
             editable={editable}
           />
@@ -122,14 +129,17 @@ class MedDetails extends Component {
     };
   }
   save = (patch) => {
-    const { id } = this.props.route.params;
-    console.log('jajaja', this.props.route.params);
+    const key = _.get(Object.keys(patch), [0], '');
+    const { id, userId } = this.props.route.params;
     const input = { patch, id};
+    if (key === 'dosis') {
+      patch[key] = parseInt(patch[key])
+    }
     return this.props.updateMed({
       variables: { input },
       refetchQueries: [{
         query: USER_MEDS,
-        variables: { userId: 1 },
+        variables: { userId },
       }]
     })
     .then(() => this.setState({editable: ''}));
