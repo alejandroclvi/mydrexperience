@@ -10,8 +10,10 @@ import React from 'react';
 import {SafeAreaView, StyleSheet, Text, StatusBar, View} from 'react-native';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
 import AppButton from '../components/AppButton';
+import moment from 'moment';
 
-const ApptDetails = () => {
+const ApptDetails = (props) => {
+  const { date, doctor, location, time } = props.route.params;
   return (
     <>
       <StatusBar barStyle="dark-content" />
@@ -20,15 +22,19 @@ const ApptDetails = () => {
           <View>
             <View style={styles.dSeparator}>
               <Text style={styles.key}>Doctor</Text>
-              <Text style={styles.sub}>Dr Manuel Calvino</Text>
+              <Text style={styles.sub}>Dr {doctor}</Text>
             </View>
             <View style={styles.dSeparator}>
               <Text style={styles.key}>Date</Text>
-              <Text style={styles.sub}>June Monday 14th, 3pm</Text>
+              <Text style={styles.sub}>{moment(date).format('MMM D ddd, YYYY')} {time}</Text>
             </View>
             <View style={styles.dSeparator}>
               <Text style={styles.key}>Doctor's notes</Text>
               <Text style={styles.sub}>Notes from the doctor....</Text>
+            </View>
+            <View style={styles.dSeparator}>
+              <Text style={styles.key}>Address</Text>
+              <Text style={styles.sub}>{location.address}</Text>
             </View>
           </View>
           <View style={styles.mapWrapper}>

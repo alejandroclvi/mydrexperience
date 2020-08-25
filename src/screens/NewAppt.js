@@ -13,7 +13,7 @@ import AppButton from '../components/AppButton';
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 import _ from 'lodash';
-import { withCreateAppointment } from '../queries';
+import { withCreateAppointment, USER_APPOINTMENTS } from '../queries';
 
 function LocationInput({onPress, value}) {
   return (
@@ -61,9 +61,16 @@ class NewAppt extends Component {
   }
   createAppointment = () => {
     const {doctor, address, date, time} = this.state;
-    const input = {doctor, address, date, time};
-    return this.props.createAppointment({input})
-    .then(result => console.log(result))
+    const input = {doctor, userId: 1, location:{address}, date, time};
+    return this.props.createAppointment({
+      variables: {input: {appointment: input}},
+      refetchQueries: [{
+        query: USER_APPOINTMENTS,
+        variables: { userId: 1 },
+      }]
+    })
+    .then(result => this.props.navigation.goBack())
+    // TODO: show error message
     .catch(console.log)
   };
   render() {

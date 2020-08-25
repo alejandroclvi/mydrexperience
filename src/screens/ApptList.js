@@ -19,6 +19,7 @@ import AppDetails from '../components/AppDetails';
 import AddAppointment from '../components/AddAppointment';
 import moment from 'moment';
 import _ from 'lodash';
+import { withAppointments } from '../queries';
 
 // TODO: Show only three appointments at a time
 
@@ -57,7 +58,8 @@ class ApptList extends Component {
     this.retrieveUserAppointments();
   }
   render() {
-    const {appointments, navigation} = this.props;
+    const {navigation} = this.props;
+    const appointments = _.get(this.props, ['withAppointments', 'appointments', 'nodes'], []);
     return (
       <>
         <StatusBar barStyle="dark-content" />
@@ -113,4 +115,4 @@ ApptList.defaultProps = {
   ],
 };
 
-export default ApptList;
+export default withAppointments(ApptList);
