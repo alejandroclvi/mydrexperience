@@ -8,7 +8,7 @@
 
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, StatusBar, View} from 'react-native';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import AppButton from '../components/AppButton';
 import moment from 'moment';
 
@@ -42,12 +42,14 @@ const ApptDetails = (props) => {
               style={styles.map}
               // provider={PROVIDER_GOOGLE}
               region={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitude: location.lat,
+                longitude: location.lng,
+                latitudeDelta: 0.0052,
+                longitudeDelta: 0.0051,
               }}
-            />
+            >
+              <Marker coordinate={{latitude: location.lat, longitude: location.lng}}/>
+            </MapView>
           </View>
         </View>
         <View style={styles.btnWrapper}>

@@ -9,7 +9,7 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View, Dimensions} from 'react-native';
 import _ from 'lodash';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {Marker} from 'react-native-maps';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import moment from 'moment';
 
@@ -18,6 +18,8 @@ class AppointmentDetails extends Component {
     const onPress = _.get(this.props, ['onPress'], () => {});
     const appointment = _.get(this.props, ['appointment', 'item'], {});
     const {doctor, time, date, location} = appointment;
+    const latitude = location.lat;
+    const longitude = location.lng;
     return (
       <View >
         <TouchableOpacity style={styles.wrapper} onPress={onPress}>
@@ -39,12 +41,14 @@ class AppointmentDetails extends Component {
               zoomEnabled={false}
               scrollEnabled={false}
               region={{
-                latitude: 37.78825,
-                longitude: -122.4324,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
+                latitude: latitude || 37.78825,
+                longitude: longitude || -122.4324,
+                latitudeDelta: 0.0052,
+                longitudeDelta: 0.0051,
               }}
-            />
+            >
+              <Marker coordinate={{latitude: location.lat, longitude: location.lng}}/>
+            </MapView>
           </View>
         </TouchableOpacity>
       </View>
