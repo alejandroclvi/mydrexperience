@@ -9,10 +9,11 @@
 import React from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
 
-const AppInputText = ({placeholder, onChangeText, value ='', onFocus}) => {
+const AppInputText = ({placeholder, encrypt, onChangeText, value ='', onFocus}) => {
   return (
     <View style={styles.inputContainer}>
       <TextInput
+        secureTextEntry={encrypt}
         onFocus={onFocus}
         value={value}
         style={styles.input}

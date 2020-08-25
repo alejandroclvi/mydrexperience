@@ -14,6 +14,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import moment from 'moment';
 import _ from 'lodash';
 import { withCreateAppointment, USER_APPOINTMENTS } from '../queries';
+import AsyncStorage from '@react-native-community/async-storage';
 
 function LocationInput({onPress, value}) {
   return (
@@ -67,12 +68,13 @@ class NewAppt extends Component {
   createAppointment = async () => {
     const {doctor, address, date, time} = this.state;
     const {lat, lng} = _.get(await this.getAddressCoords(address), ['results', 0, 'geometry', 'location']);
-    const input = {doctor, userId: 1, location: {address, lat, lng}, date, time};
+    const userId = parseInt(await AsyncStorage.getItem('user'));
+    const input = {doctor, userId, location: {address, lat, lng}, date, time};
     return this.props.createAppointment({
       variables: {input: {appointment: input}},
       refetchQueries: [{
         query: USER_APPOINTMENTS,
-        variables: { userId: 1 },
+        variables: { userId: userId },
       }]
     })
     .then(result => this.props.navigation.goBack())

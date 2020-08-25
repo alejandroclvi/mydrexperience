@@ -58,7 +58,7 @@ class ApptList extends Component {
     this.retrieveUserAppointments();
   }
   render() {
-    const {navigation} = this.props;
+    const {navigation, userId} = this.props;
     const appointments = _.get(this.props, ['withAppointments', 'appointments', 'nodes'], []);
     return (
       <>
@@ -77,6 +77,25 @@ class ApptList extends Component {
     );
   }
 }
+const ConnectedApptList = withAppointments(ApptList);
+
+class ApptListWithUserId extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: null,
+    }
+  }
+  async componentDidMount() {
+    const user = await AsyncStorage.getItem('user');
+    this.setState({userId: parseInt(user)});
+  }
+  render() {
+    const { userId } = this.state;
+    console.log('uid', userId);
+    return <ConnectedApptList {...this.props} userId={userId}/>
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -92,27 +111,4 @@ const styles = StyleSheet.create({
   },
 });
 
-ApptList.defaultProps = {
-  appointments: [
-    {
-      doctor: 'Dr Manuel Calvino',
-      notes: 'Please come to the visit...',
-      location: {lat: 33.3333, lon: 33.3333},
-      time: moment().format('Ddd hh:mm a'),
-    },
-    {
-      doctor: 'Dr Manuel Calvino',
-      notes: 'Please come to the visit...',
-      location: {lat: 33.3333, lon: 33.3333},
-      time: moment().format('Ddd hh:mm a'),
-    },
-    {
-      doctor: 'Dr Manuelll Calvino',
-      notes: 'Please come to the visit...',
-      location: {lat: 33.3333, lon: 33.3333},
-      time: moment().format('Ddd hh:mm a'),
-    },
-  ],
-};
-
-export default withAppointments(ApptList);
+export default withAppointments(ApptListWithUserId);

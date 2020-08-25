@@ -41,9 +41,9 @@ class Login extends Component {
     }
   };
 
-  logUserIn = async (email) => {
+  logUserIn = async (id) => {
     try {
-      await AsyncStorage.setItem('user', email);
+      await AsyncStorage.setItem('user', id);
     } catch (error) {
       // Error saving data
     }
@@ -53,9 +53,10 @@ class Login extends Component {
     // TODO: sanitize input
     const {email, password} = this.state;
     const user = await this.retrieveUser(email);
+    console.log('user', user, password);
     if (user && user.password === password) {
       //log user in
-      await this.logUserIn(email);
+      await this.logUserIn(user.id);
       this.setState({email: '', password: ''});
       this.props.navigation.navigate('HomeTabNavigator');
     } else {
@@ -64,6 +65,7 @@ class Login extends Component {
   };
 
   render() {
+    const { email, password } = this.state;
     const {navigation} = this.props;
     return (
       <>
@@ -72,12 +74,15 @@ class Login extends Component {
           <Logo />
           <View style={styles.inputWrapper}>
             <AppInputText
+              value={email}
               placeholder="email"
               onChangeText={(text) => this.setState({email: text})}
             />
           </View>
           <View style={styles.inputWrapper}>
             <AppInputText
+              encrypt
+              value={password}
               placeholder="password"
               onChangeText={(text) => this.setState({password: text})}
             />
@@ -98,6 +103,7 @@ class Login extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: 'white',
   },
   logoContainer: {
     flex: 0.3,
