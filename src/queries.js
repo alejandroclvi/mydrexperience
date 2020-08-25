@@ -12,3 +12,13 @@ export const USERS = gql`
 `;
 
 export const withUsers = graphql(USERS, { name: "users" });
+
+export const CREATE_APPOINTMENT = gql`
+  mutation CreateAppointment($input: createAppointmentInput!) {
+    appointment(input: $input) {
+      id
+    }
+  }
+`;
+
+export const withCreateAppointment = graphql(CREATE_APPOINTMENT, { name: "createAppointment" });

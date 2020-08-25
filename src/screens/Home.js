@@ -94,12 +94,8 @@ const not_app = {
 };
 
 class Home extends Component {
-  // async componentDidMount() {
-  //   console.log('props', await this.props.users.startPolling(1000));
-  // }
   render() {
     const {user, medications, upcomingAppt} = this.props;
-   //this.props.users.loading ? this.props.users.refetch() : null;
     console.log('props.', this.props);
     return (
       <>

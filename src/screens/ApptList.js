@@ -43,7 +43,7 @@ class ApptList extends Component {
   }
   retrieveUserAppointments = async () => {
     try {
-      const user_email = await AsyncStorage.getItem('user');
+      const user_email = (await AsyncStorage.getItem('user')||'');
       const user_data = await AsyncStorage.getItem(user_email);
       const appointments = _.get(user_data, ['appointments'], []);
       this.setState({appointments});

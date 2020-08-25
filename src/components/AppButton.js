@@ -9,15 +9,23 @@
 import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 
-const AppButton = ({title, onPress}) => {
-  return (
-    <>
+const AppButton = ({title, onPress, disabled}) => {
+  if(disabled) {
+    return (
       <View style={styles.buttonWrapper}>
-        <TouchableOpacity onPress={onPress} style={styles.button}>
+        <View style={styles.button}>
           <Text>{title}</Text>
-        </TouchableOpacity>
+        </View>
       </View>
-    </>
+    );
+  }
+  const enabledStyle = [styles.button, styles.enabled];
+  return (
+    <View style={styles.buttonWrapper}>
+      <TouchableOpacity onPress={onPress} style={enabledStyle}>
+        <Text>{title}</Text>
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -27,11 +35,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 6,
-    backgroundColor: 'white',
     borderWidth: 1,
     borderColor: 'red',
     margin: 5,
     borderRadius: 10,
+  },
+  enabled: {
+    backgroundColor: 'white',
   },
   buttonWrapper: {
     width: '100%',

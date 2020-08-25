@@ -9,10 +9,12 @@
 import React from 'react';
 import {StyleSheet, View, TextInput} from 'react-native';
 
-const Login = ({placeholder, onChangeText}) => {
+const AppInputText = ({placeholder, onChangeText, value ='', onFocus}) => {
   return (
     <View style={styles.inputContainer}>
       <TextInput
+        onFocus={onFocus}
+        value={value}
         style={styles.input}
         autoCapitalize='none'
         onChangeText={onChangeText}
@@ -39,4 +41,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+export default AppInputText;
