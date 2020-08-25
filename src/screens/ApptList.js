@@ -13,6 +13,7 @@ import {
   StatusBar,
   FlatList,
   View,
+  Text,
 } from 'react-native';
 import AppDetails from '../components/AppDetails';
 import AddAppointment from '../components/AddAppointment';
@@ -65,6 +66,9 @@ class ApptList extends Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <View style={styles.wrapper}>
+            {!appointments.length &&
+              <Text>No appointments have been created. Create your first!</Text>
+            }
             <FlatList
               data={appointments}
               renderItem={(item) => renderAppointment(item, navigation)}

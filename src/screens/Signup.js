@@ -17,7 +17,7 @@ import AppButton from '../components/AppButton';
 import AppInputText from '../components/AppInputText';
 import Logo from '../components/Logo';
 import AsyncStorage from '@react-native-community/async-storage';
-import { withCreateUser } from '../queries';
+import { withCreateUser, withCreateMed } from '../queries';
 import _ from 'lodash';
 
 class Signup extends Component {
@@ -57,11 +57,23 @@ class Signup extends Component {
           },
         });
         const id = (_.get(user_result, ['data', 'createUser', 'user', 'id'], 0)).toString();
+        await this.props.createMed({
+          variables: {
+            input: {
+              med: {
+                name: 'Tylenol 200mg',
+                dosis: 2,
+                frequency: 'Daily',
+                cost: 4.99,
+                userId: parseInt(id),
+              }
+            }
+          }
+        });
         await AsyncStorage.setItem(email, JSON.stringify({email, password, id}));
         // log user in
         await this.logUserIn(id);
         // navigate home
-        console.log('jajajajajajaj')
         this.props.navigation.navigate('HomeTabNavigator');
       } catch (error) {
         // Error saving data
@@ -137,4 +149,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withCreateUser(Signup);
+export default withCreateUser(withCreateMed(Signup));

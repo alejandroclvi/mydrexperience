@@ -98,3 +98,15 @@ export const CREATE_USER = gql`
 `;
 
 export const withCreateUser = graphql(CREATE_USER, { name: "createUser" });
+
+export const CREATE_MED= gql`
+  mutation CreateMed($input: CreateMedInput!) {
+    createMed(input: $input) {
+      med {
+        id
+      }
+    }
+  }
+`;
+
+export const withCreateMed = graphql(CREATE_MED, { name: "createMed" });

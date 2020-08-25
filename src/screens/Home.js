@@ -88,7 +88,7 @@ const not_app = {
   type: 'appt',
   notification: {
     doctor: 'Manuel Calvino',
-    time: moment().format('Ddd hh:mm a'),
+    time: moment().format('MMM D ddd, hh:mm a'),
     notes: 'Fasting visit',
   },
 };
