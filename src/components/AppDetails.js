@@ -36,6 +36,8 @@ class AppointmentDetails extends Component {
             <MapView
               style={styles.map}
               // provider={PROVIDER_GOOGLE}
+              zoomEnabled={false}
+              scrollEnabled={false}
               region={{
                 latitude: 37.78825,
                 longitude: -122.4324,

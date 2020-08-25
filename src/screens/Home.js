@@ -106,7 +106,8 @@ class Home extends Component {
             <Text style={styles.greeting}>
               Welcome back,
             </Text>
-            <Text style={[styles.greeting, {marginLeft: 3, color: '#1e90ff'}]}>{_.get(user, ['name'], 'user')}!</Text>
+            <Text style={[styles.greeting, {marginLeft: 3, color: '#1e90ff'}]}>{_.get(user, ['name'], 'user')}</Text>
+            <Text style={styles.greeting}>!</Text>
           </View>
             <View style={styles.imageWrapper}>
               <Image

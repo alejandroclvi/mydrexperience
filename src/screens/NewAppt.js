@@ -59,9 +59,15 @@ class NewAppt extends Component {
   componentDidUpdate() {
     console.log(this.state);
   }
-  createAppointment = () => {
+  getAddressCoords = (address='') => {
+    return fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address.replace(' ', '+')}&key=AIzaSyCH3uGh1D8wrG0yM7OF6gIjJ1SDgxSI08M`)
+    .then(result => result.json())
+    .catch(console.log); // TODO: handle this error
+  }
+  createAppointment = async () => {
     const {doctor, address, date, time} = this.state;
-    const input = {doctor, userId: 1, location:{address}, date, time};
+    const {lat, lng} = _.get(await this.getAddressCoords(address), ['results', 0, 'geometry', 'location']);
+    const input = {doctor, userId: 1, location: {address, lat, lng}, date, time};
     return this.props.createAppointment({
       variables: {input: {appointment: input}},
       refetchQueries: [{
