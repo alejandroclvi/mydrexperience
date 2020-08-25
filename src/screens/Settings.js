@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
   section: {
     width: '100%',
     padding: 20,
-    backgroundColor: 'green',
   },
   btnWrapper: {
     position: 'absolute',

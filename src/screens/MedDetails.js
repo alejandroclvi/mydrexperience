@@ -32,7 +32,7 @@ class EditableSection extends Component {
     const {editable, onFocus, value, name, save} = this.props;
     const isBeingEdited = name === editable;
     return (
-      <View style={{flexDirection: 'row', borderRadius: 10, marginTop: 10, backgroundColor: 'lightblue', padding: 10}} onPress={() => {}}>
+      <View style={{flexDirection: 'row', borderRadius: 10, marginTop: 10, backgroundColor: '#1e90ff', padding: 10}} onPress={() => {}}>
          <TextInput
           ref='input'
           onFocus={onFocus}
@@ -48,12 +48,12 @@ class EditableSection extends Component {
                 save({[name]: newValue})
                 this.refs.input.blur();
               }}
-              style={{color: 'red'}}
+              style={{color: 'white', fontWeight: 'bold'}}
             >
               Save
             </Text>
             :
-            <Text onPress={() => this.refs.input.focus()} style={{color: 'red'}}>Edit</Text>
+            <Text onPress={() => this.refs.input.focus()} style={{color: 'white', fontWeight: 'bold'}}>Edit</Text>
           }
         </View>
       </View>
@@ -172,6 +172,8 @@ const styles = StyleSheet.create({
   },
   value: {
     width: '100%',
+    color: 'white',
+    fontWeight: 'bold',
   },
   subHeader: {
     fontWeight: 'bold',

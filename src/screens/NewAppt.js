@@ -19,7 +19,7 @@ function LocationInput({onPress, value}) {
   return (
     <TouchableOpacity style={inputStyle.container} onPress={onPress}>
       <View style={inputStyle.wrapper}>
-        <Text style={value ? null : inputStyle.placeholder}>{value||'Enter Location'}</Text>
+        <Text style={value ? null : inputStyle.placeholder}>{value||'Select Location....'}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -37,10 +37,10 @@ const inputStyle = StyleSheet.create({
     justifyContent: 'center',
     paddingLeft: 20,
     width: '90%',
-    height: 60,
-    borderRadius: 30,
+    height: 50,
+    borderRadius: 5,
     borderWidth: 1,
-    borderColor: 'green',
+    borderColor: '#1e90ff',
   },
 });
 // docotr, date & time, location

@@ -106,7 +106,7 @@ class Home extends Component {
             <Text style={styles.greeting}>
               Welcome back,
             </Text>
-            <Text style={[styles.greeting, {marginLeft: 3, color: '#6975ff'}]}>{_.get(user, ['name'], 'user')}!</Text>
+            <Text style={[styles.greeting, {marginLeft: 3, color: '#1e90ff'}]}>{_.get(user, ['name'], 'user')}!</Text>
           </View>
             <View style={styles.imageWrapper}>
               <Image
@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   notWrapper: {
-    backgroundColor: '#6975ff',
+    backgroundColor: '#1e90ff',
     padding: 5,
     borderRadius: 2.5,
     marginLeft: 10,

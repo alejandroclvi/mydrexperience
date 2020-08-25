@@ -14,7 +14,7 @@ const AppButton = ({title, onPress, disabled}) => {
     return (
       <View style={styles.buttonWrapper}>
         <View style={styles.button}>
-          <Text>{title}</Text>
+          <Text style={{color: 'grey', fontWeight: 'bold'}}>{title}</Text>
         </View>
       </View>
     );
@@ -23,7 +23,7 @@ const AppButton = ({title, onPress, disabled}) => {
   return (
     <View style={styles.buttonWrapper}>
       <TouchableOpacity onPress={onPress} style={enabledStyle}>
-        <Text>{title}</Text>
+        <Text style={styles.title}>{title}</Text>
       </TouchableOpacity>
     </View>
   );
@@ -35,13 +35,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 6,
-    borderWidth: 1,
-    borderColor: 'red',
     margin: 5,
     borderRadius: 10,
+    borderWidth: 1,
+    borderColor: '#1e90ff',
+  },
+  title: {
+    fontWeight: 'bold',
+    color: 'white',
   },
   enabled: {
-    backgroundColor: 'white',
+    backgroundColor: '#1e90ff',
   },
   buttonWrapper: {
     width: '100%',
