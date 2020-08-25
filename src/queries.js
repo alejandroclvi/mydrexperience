@@ -27,7 +27,7 @@ export const withCreateAppointment = graphql(CREATE_APPOINTMENT, { name: "create
 
 // TODO: pass down user id $userId: Int!
 export const USER_APPOINTMENTS = gql`
-  query Appointments($userId: Int!) { 
+  query Appointments($userId: Int) { 
     appointments(condition: {userId: $userId}) {
       nodes {
         doctor
@@ -43,8 +43,8 @@ export const withAppointments = graphql(USER_APPOINTMENTS, { name: "withAppointm
 
 // TODO: pass down user id $userId: Int!
 export const USER_MEDS = gql`
-  query Meds { 
-    meds(condition: {userId: 1}) {
+  query Meds($userId: Int) { 
+    meds(condition: {userId: $userId}) {
       nodes {
         id
         name

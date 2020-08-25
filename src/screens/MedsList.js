@@ -7,7 +7,7 @@
  * @flow strict-local
  */
 
-import React from 'react';
+import React, {Component} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -18,6 +18,7 @@ import {
 import MedicationListItem from '../components/MedicationListItem';
 import { withMeds } from '../queries';
 import _ from 'lodash';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const MedList = ({navigation, withMeds, meds}) => {
   const onPress = (med) => navigation.navigate('MedDetails', med);
@@ -41,40 +42,23 @@ const MedList = ({navigation, withMeds, meds}) => {
   );
 };
 
-// MedList.defaultProps = {
-//   medicaments: [
-//     {
-//       name: 'Ibuprofen',
-//       frequency: 'Daily',
-//       dosis: '2 Pills',
-//       cost: 4.99,
-//     },
-//     {
-//       name: 'Ibuprofen',
-//       frequency: 'Daily',
-//       dosis: '2 Pills',
-//       cost: 4.99,
-//     },
-//     {
-//       name: 'Ibuprofen',
-//       frequency: 'Daily',
-//       dosis: '2 Pills',
-//       cost: 4.99,
-//     },
-//     {
-//       name: 'Ibuprofen',
-//       frequency: 'Daily',
-//       dosis: '2 Pills',
-//       cost: 4.99,
-//     },
-//     {
-//       name: 'Ibuprofen',
-//       frequency: 'Daily',
-//       dosis: '2 Pills',
-//       cost: 4.99,
-//     },
-//   ],
-// };
+const ConnectedMedList = withMeds(MedList);
+class MedListWithUserId extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      userId: null,
+    }
+  }
+  async componentDidMount() {
+    const user = await AsyncStorage.getItem('user');
+    this.setState({userId: parseInt(user)});
+  }
+  render() {
+    const { userId } = this.state;
+    return <ConnectedMedList {...this.props} userId={userId}/>
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -90,4 +74,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default withMeds(MedList);
+export default withMeds(MedListWithUserId);

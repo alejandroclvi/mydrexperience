@@ -58,7 +58,7 @@ class ApptList extends Component {
     this.retrieveUserAppointments();
   }
   render() {
-    const {navigation, userId} = this.props;
+    const {navigation} = this.props;
     const appointments = _.get(this.props, ['withAppointments', 'appointments', 'nodes'], []);
     return (
       <>
@@ -92,7 +92,6 @@ class ApptListWithUserId extends Component {
   }
   render() {
     const { userId } = this.state;
-    console.log('uid', userId);
     return <ConnectedApptList {...this.props} userId={userId}/>
   }
 }
