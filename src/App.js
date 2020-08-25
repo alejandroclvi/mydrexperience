@@ -22,6 +22,7 @@ import {
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {Icon} from 'react-native-elements';
 //TODO: is user logged in?
 const isUserLoggedIn = true;
 const Stack = createStackNavigator();
@@ -105,10 +106,23 @@ function AppointmentListStack() {
 function HomeTabNavigator() {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="ApptListStack" component={AppointmentListStack} />
-      <Tab.Screen name="MedListStack" component={MedListStack} />
-      <Tab.Screen name="Settings" component={SettingsStack} />
+      <Tab.Screen name="Home" component={HomeStack}
+        options={{
+          tabBarIcon:  () => <Icon name="home" type="feather" />
+        }}
+      />
+      <Tab.Screen name="Appointments" component={AppointmentListStack} 
+        options={{
+          tabBarIcon:  () => <Icon name="calendar" type="feather" />
+        }}/>
+      <Tab.Screen name="Medication" component={MedListStack} 
+        options={{
+          tabBarIcon:  () => <Icon name="plus-square" type="feather" />
+        }}/>
+      <Tab.Screen name="Settings" component={SettingsStack} 
+        options={{
+          tabBarIcon:  () => <Icon name="settings" type="feather" />
+        }}/>
     </Tab.Navigator>
   );
 }

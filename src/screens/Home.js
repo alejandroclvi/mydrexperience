@@ -102,9 +102,12 @@ class Home extends Component {
         <StatusBar barStyle="dark-content" />
         <SafeAreaView style={styles.container}>
           <View style={styles.mainWrapper}>
+          <View style={{flexDirection: 'row', alignItems: 'center'}}>
             <Text style={styles.greeting}>
-              Welcome back, {_.get(user, ['name'], 'user')}!
+              Welcome back,
             </Text>
+            <Text style={[styles.greeting, {marginLeft: 3, color: '#6975ff'}]}>{_.get(user, ['name'], 'user')}!</Text>
+          </View>
             <View style={styles.imageWrapper}>
               <Image
                 style={styles.img}
@@ -114,7 +117,11 @@ class Home extends Component {
           </View>
           <View style={styles.notifications}>
             <View>
+            <View style={{flexDirection: 'row', alignItems: 'center'}}>
               <Text style={styles.header}>Notifications</Text>
+              <View style={styles.notWrapper}><Text style={{color: 'white', fontWeight: 'bold'}}>2</Text></View>
+            </View>
+
               <View style={styles.notificationsWrapper}>
                 {/** TODO: use a flatlist to render notifications */}
                 <Notification {...not} />
@@ -132,6 +139,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  notWrapper: {
+    backgroundColor: '#6975ff',
+    padding: 5,
+    borderRadius: 2.5,
+    marginLeft: 10,
+  },
   notificationsWrapper: {
     width: '100%',
     height: '90%',
@@ -140,7 +153,6 @@ const styles = StyleSheet.create({
   header: {
     fontWeight: 'bold',
     fontSize: 23,
-    marginBottom: 20,
   },
   notifications: {
     flex: 1,
