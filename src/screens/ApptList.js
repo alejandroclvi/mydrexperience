@@ -13,13 +13,13 @@ import {
   StatusBar,
   FlatList,
   View,
-  AsyncStorage,
 } from 'react-native';
 import AppDetails from '../components/AppDetails';
 import AddAppointment from '../components/AddAppointment';
 import moment from 'moment';
 import _ from 'lodash';
 import { withAppointments } from '../queries';
+import AsyncStorage from '@react-native-community/async-storage';
 
 // TODO: Show only three appointments at a time
 
@@ -68,7 +68,7 @@ class ApptList extends Component {
             <FlatList
               data={appointments}
               renderItem={(item) => renderAppointment(item, navigation)}
-              keyExtractor={(item) => item.id}
+              keyExtractor={(item, index) => `${index}`}
             />
           </View>
           <AddAppointment onPress={() => navigation.navigate('NewAppt')} />

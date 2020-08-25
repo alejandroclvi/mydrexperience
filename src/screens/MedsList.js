@@ -16,18 +16,22 @@ import {
   FlatList,
 } from 'react-native';
 import MedicationListItem from '../components/MedicationListItem';
+import { withMeds } from '../queries';
+import _ from 'lodash';
 
-const MedList = ({medicaments, navigation}) => {
+const MedList = ({navigation, withMeds, meds}) => {
   const onPress = (med) => navigation.navigate('MedDetails', med);
+  const medicaments = _.get(meds, ['meds', 'nodes'], []);
   return (
     <>
       <StatusBar barStyle="dark-content" />
       <SafeAreaView style={styles.container}>
-        <View style={styles.chartWrapper} />
+        {/* <View style={styles.chartWrapper} /> */}
         <View style={styles.MedicationListWrapper}>
           <FlatList
-            renderItem={({item}) => (
-              <MedicationListItem medicament={item} onPress={onPress} />
+            keyExtractor={(item, index) => `${index}`}
+            renderItem={({item}, idx) => (
+              <MedicationListItem key={1} medicament={item} onPress={onPress} />
             )}
             data={medicaments}
           />
@@ -37,40 +41,40 @@ const MedList = ({medicaments, navigation}) => {
   );
 };
 
-MedList.defaultProps = {
-  medicaments: [
-    {
-      name: 'Ibuprofen',
-      frequency: 'Daily',
-      dosis: '2 Pills',
-      cost: 4.99,
-    },
-    {
-      name: 'Ibuprofen',
-      frequency: 'Daily',
-      dosis: '2 Pills',
-      cost: 4.99,
-    },
-    {
-      name: 'Ibuprofen',
-      frequency: 'Daily',
-      dosis: '2 Pills',
-      cost: 4.99,
-    },
-    {
-      name: 'Ibuprofen',
-      frequency: 'Daily',
-      dosis: '2 Pills',
-      cost: 4.99,
-    },
-    {
-      name: 'Ibuprofen',
-      frequency: 'Daily',
-      dosis: '2 Pills',
-      cost: 4.99,
-    },
-  ],
-};
+// MedList.defaultProps = {
+//   medicaments: [
+//     {
+//       name: 'Ibuprofen',
+//       frequency: 'Daily',
+//       dosis: '2 Pills',
+//       cost: 4.99,
+//     },
+//     {
+//       name: 'Ibuprofen',
+//       frequency: 'Daily',
+//       dosis: '2 Pills',
+//       cost: 4.99,
+//     },
+//     {
+//       name: 'Ibuprofen',
+//       frequency: 'Daily',
+//       dosis: '2 Pills',
+//       cost: 4.99,
+//     },
+//     {
+//       name: 'Ibuprofen',
+//       frequency: 'Daily',
+//       dosis: '2 Pills',
+//       cost: 4.99,
+//     },
+//     {
+//       name: 'Ibuprofen',
+//       frequency: 'Daily',
+//       dosis: '2 Pills',
+//       cost: 4.99,
+//     },
+//   ],
+// };
 
 const styles = StyleSheet.create({
   container: {
@@ -86,4 +90,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default MedList;
+export default withMeds(MedList);

@@ -13,10 +13,10 @@ import {
   Text,
   StatusBar,
   View,
-  AsyncStorage,
 } from 'react-native';
 import AppButton from '../components/AppButton';
 // TODO: make fields mutable
+import AsyncStorage from '@react-native-community/async-storage';
 
 class Settings extends Component {
   logUserOut = async () => {

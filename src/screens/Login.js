@@ -12,11 +12,11 @@ import {
   StyleSheet,
   StatusBar,
   View,
-  AsyncStorage,
 } from 'react-native';
 import AppButton from '../components/AppButton';
 import AppInputText from '../components/AppInputText';
 import Logo from '../components/Logo';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class Login extends Component {
   constructor(props) {

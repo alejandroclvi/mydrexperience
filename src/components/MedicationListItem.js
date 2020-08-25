@@ -12,7 +12,6 @@ import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
 // medications (your choice of medication name). Data: medication name,
 // dosage, frequency. E.g. Tylenol, 1 tablet, 4 times/day, cost
 const MedicationListItem = ({medicament, onPress}) => {
-  console.log('meeeee', medicament);
   const {cost, name, dosis, frequency} = medicament;
   return (
     <TouchableOpacity
