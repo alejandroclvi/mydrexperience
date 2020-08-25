@@ -39,6 +39,7 @@ class EditableSection extends Component {
           value={isBeingEdited ? newValue: value}
           style={styles.value}
           autoCapitalize='none'
+          autoCorrect={false}
           onChangeText={text => this.setState({newValue: text})}
         />
         <View style={styles.actionBtn}>

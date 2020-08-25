@@ -17,6 +17,7 @@ const AppInputText = ({placeholder, onChangeText, value ='', onFocus}) => {
         value={value}
         style={styles.input}
         autoCapitalize='none'
+        autoCorrect={false}
         onChangeText={onChangeText}
         placeholder={`${placeholder}`}
       />
